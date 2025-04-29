@@ -1,0 +1,78 @@
+.todo-list {
+  background-color: #f7f9fc;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 30px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  .todo-list-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .todo-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    input {
+      padding: 8px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+
+      &:focus {
+        border-color: #5c6bc0;
+      }
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+
+      button {
+        padding: 6px 12px;
+        border-radius: 6px;
+        background-color: #e0e0e0;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &.active {
+          background-color: #5c6bc0;
+          color: white;
+        }
+
+        &:hover {
+          background-color: #b0bec5;
+        }
+      }
+    }
+  }
+
+  .task-count {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+  }
+
+  .todo-list-content {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .no-todos {
+    margin-top: 20px;
+    text-align: center;
+    color: #999;
+    font-size: 18px;
+  }
+}
