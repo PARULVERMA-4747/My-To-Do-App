@@ -11,7 +11,7 @@ export const TodoForm = ({ onAddTodo }) => {
         label: task,
         checked: false,
       };
-      onAddTodo(newTask); // 👈 call parent function
+      onAddTodo(newTask); // call parent function
       setTask(''); // Clear input
     }
   };

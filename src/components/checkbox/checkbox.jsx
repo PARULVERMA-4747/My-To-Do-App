@@ -3,10 +3,10 @@ import './checkbox.scss';
 
 /**
  * @param {{
- *   label: string,
- *   checked: boolean,
- *   onClick: () => void,
- *   onDelete: () => void
+ *   label: string,         // Task name
+ *   checked: boolean,      // Whether checkbox is checked
+ *   onClick: () => void,   // Called when checkbox is clicked
+ *   onDelete: () => void   // Called when delete button is clicked
  * }} props
  */
 export const Checkbox = ({

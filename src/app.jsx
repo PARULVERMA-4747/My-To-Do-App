@@ -66,9 +66,56 @@ const todosTemplate = [
 ];
 
 export const App = () => {
-  const [todos, setTodos] = React.useState(
-    todosTemplate, // Trailing comma added here
-  );
+  const [todos, setTodos] = React.useState(() => {
+    //  todosTemplate,Trailing comma added here
+    const savedTodos = localStorage.getItem('todos');
+    return savedTodos ? JSON.parse(savedTodos) : todosTemplate;
+    
+});
+
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
+
+React.useEffect(() =>{
+  fetch('https://jsonplaceholder.typicode.com/todos')
+    .then((res) => {
+      if(!res.ok) throw new Error (`HTTP error! status: ${res.status}`);
+      return res.json();
+    })
+    .then((apiTodos) => {
+      setTodos ((prevTodos) => {
+      const existingIds = new Set(prevTodos.map(todo => todo.id));
+      const filteredApiTodos = apiTodos
+        .filter(todo => !existingIds.has(todo.id))
+        .map(todo => ({
+          id: todo.id,
+          label: todo.label || todo.title || 'Untitled Task',
+          checked : todo.completed ?? false,
+        }));
+      return [...prevTodos, ...filteredApiTodos];
+      });
+      // const formattedApiTodos= apiTodos.map((todo, idx) => ({
+      //   id: todo.id,
+      //   label: todo.label || todo.title,
+      //   checked : todo.completed ?? false,
+      // }));
+
+      const mergedTodos = [...todos, ...formattedApiTodos];
+      setTodos(mergedTodos);
+      setLoading(false);
+      
+    })
+    .catch((err) =>{
+      console.error('Failed to fetch todos:', err);
+      //setError(err.message);
+      setLoading(false);
+    });
+},[]);
+
+React.useEffect(() => {
+  localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
 
   return (
     <div className="root">
